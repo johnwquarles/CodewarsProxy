@@ -7,11 +7,21 @@ if (process.env.NODE_ENV !== 'production') {
 
 var model = require('./models/codeWarsModel.js')
 
-app.get('/codewars', function(req, res) {
+app.get('/codewarsJQ', function(req, res) {
   // enable cross-origin resource sharing
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  model(function(err, response) {
+  model.getMyData(function(err, response) {
+    // send out JSON just as you received it.
+    err ? res.send(err): res.send(response);
+  });
+});
+
+app.get('/outOf', function(req, res) {
+  // enable cross-origin resource sharing
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  model.getOutOf(function(err, response) {
     // send out JSON just as you received it.
     err ? res.send(err): res.send(response);
   });
